@@ -1,0 +1,71 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>RemotePrint Controller</title>
+<link rel="stylesheet" type="text/css" href="view.css" media="all">
+<script type="text/javascript" src="view.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="notify.min.js"></script>
+<script>
+	function post(gcode) {
+	    var http = new XMLHttpRequest();
+	    http.open("POST", "post.php", true);
+	    http.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+	    var params = "gcode=" + gcode;
+	    http.send(params);
+	    http.onload = function() {
+	        $.notify("Command Sent!", "success");
+	    }
+	}
+
+	function add(addvar) {
+          document.getElementById('gcode').value=document.getElementById('gcode').value+addvar
+		  post(addvar);
+		  document.getElementById('gcode').scrollTop = document.getElementById('gcode').scrollHeight;
+    }
+</script>
+</head>
+<body id="main_body">
+<img id="top" src="top.png" alt="">
+<div id="form_container">
+<div>
+<form class="appnitro" action="#">
+<div class="form_description"><br>
+<h2>RemotePrint Controller</h2>
+</div>
+<h3>CNC Controls:</h3>
+XYZ Speed (mm/min): <input value="200" id="xyzspeed" style="width:40px;"><br><br>
+X-Axis: <button onclick="add('G28 X0 ; set X axis to home position (0)\n');">Home</button> <button onclick="add('G91 ; enter relative positioning mode\nG0 X-100 F'+document.getElementById('xyzspeed').value+' ; move -100 mm in the X-direction at '+document.getElementById('xyzspeed').value+' mm/min\nG90 ; enter absolute positioning mode\n');">-100</button><button onclick="add('G91 ; enter relative positioning mode\nG0 X-10 F'+document.getElementById('xyzspeed').value+' ; move -10 mm in the X-direction at '+document.getElementById('xyzspeed').value+' mm/min\nG90 ; enter absolute positioning mode\n');">-10</button><button onclick="add('G91 ; enter relative positioning mode\nG0 X-1 F'+document.getElementById('xyzspeed').value+' ; move -1 mm in the X-direction at '+document.getElementById('xyzspeed').value+' mm/min\nG90 ; enter absolute positioning mode\n');">-1</button><button onclick="add('G91 ; enter relative positioning mode\nG0 X-0.1 F'+document.getElementById('xyzspeed').value+' ; move -0.1 mm in the X-direction at '+document.getElementById('xyzspeed').value+' mm/min\nG90 ; enter absolute positioning mode\n');">-0.1</button><button onclick="add('G91 ; enter relative positioning mode\nG0 X0.1 F'+document.getElementById('xyzspeed').value+' ; move 0.1 mm in the X-direction at '+document.getElementById('xyzspeed').value+' mm/min\nG90 ; enter absolute positioning mode\n');">0.1</button><button onclick="add('G91 ; enter relative positioning mode\nG0 X1 F'+document.getElementById('xyzspeed').value+' ; move 1 mm in the X-direction at '+document.getElementById('xyzspeed').value+' mm/min\nG90 ; enter absolute positioning mode\n');">1</button><button onclick="add('G91 ; enter relative positioning mode\nG0 X10 F'+document.getElementById('xyzspeed').value+' ; move 10 mm in the X-direction at '+document.getElementById('xyzspeed').value+' mm/min\nG90 ; enter absolute positioning mode\n');">10</button><button onclick="add('G91 ; enter relative positioning mode\nG0 X100 F'+document.getElementById('xyzspeed').value+' ; move 100 mm in the X-direction at '+document.getElementById('xyzspeed').value+' mm/min\nG90 ; enter absolute positioning mode\n');">100</button><br>
+Y-Axis: <button onclick="add('G28 Y0 ; set Y axis to home position (0)\n');">Home</button> <button onclick="add('G91 ; enter relative positioning mode\nG0 Y-100 F'+document.getElementById('xyzspeed').value+' ; move -100 mm in the Y-direction at '+document.getElementById('xyzspeed').value+' mm/min\nG90 ; enter absolute positioning mode\n');">-100</button><button onclick="add('G91 ; enter relative positioning mode\nG0 Y-10 F'+document.getElementById('xyzspeed').value+' ; move -10 mm in the Y-direction at '+document.getElementById('xyzspeed').value+' mm/min\nG90 ; enter absolute positioning mode\n');">-10</button><button onclick="add('G91 ; enter relative positioning mode\nG0 Y-1 F'+document.getElementById('xyzspeed').value+' ; move -1 mm in the Y-direction at '+document.getElementById('xyzspeed').value+' mm/min\nG90 ; enter absolute positioning mode\n');">-1</button><button onclick="add('G91 ; enter relative positioning mode\nG0 Y-0.1 F'+document.getElementById('xyzspeed').value+' ; move -0.1 mm in the Y-direction at '+document.getElementById('xyzspeed').value+' mm/min\nG90 ; enter absolute positioning mode\n');">-0.1</button><button onclick="add('G91 ; enter relative positioning mode\nG0 Y0.1 F'+document.getElementById('xyzspeed').value+' ; move 0.1 mm in the Y-direction at '+document.getElementById('xyzspeed').value+' mm/min\nG90 ; enter absolute positioning mode\n');">0.1</button><button onclick="add('G91 ; enter relative positioning mode\nG0 Y1 F'+document.getElementById('xyzspeed').value+' ; move 1 mm in the Y-direction at '+document.getElementById('xyzspeed').value+' mm/min\nG90 ; enter absolute positioning mode\n');">1</button><button onclick="add('G91 ; enter relative positioning mode\nG0 Y10 F'+document.getElementById('xyzspeed').value+' ; move 10 mm in the Y-direction at '+document.getElementById('xyzspeed').value+' mm/min\nG90 ; enter absolute positioning mode\n');">10</button><button onclick="add('G91 ; enter relative positioning mode\nG0 Y100 F'+document.getElementById('xyzspeed').value+' ; move 100 mm in the Y-direction at '+document.getElementById('xyzspeed').value+' mm/min\nG90 ; enter absolute positioning mode\n');">100</button><br>
+Z-Axis: <button onclick="add('G28 Z0 ; set Z axis to home position (0)\n');">Home</button> <button onclick="add('G91 ; enter relative positioning mode\nG0 Z-100 F'+document.getElementById('xyzspeed').value+' ; move -100 mm in the Z-direction at '+document.getElementById('xyzspeed').value+' mm/min\nG90 ; enter absolute positioning mode\n');">-100</button><button onclick="add('G91 ; enter relative positioning mode\nG0 Z-10 F'+document.getElementById('xyzspeed').value+' ; move -10 mm in the Z-direction at '+document.getElementById('xyzspeed').value+' mm/min\nG90 ; enter absolute positioning mode\n');">-10</button><button onclick="add('G91 ; enter relative positioning mode\nG0 Z-1 F'+document.getElementById('xyzspeed').value+' ; move -1 mm in the Z-direction at '+document.getElementById('xyzspeed').value+' mm/min\nG90 ; enter absolute positioning mode\n');">-1</button><button onclick="add('G91 ; enter relative positioning mode\nG0 Z-0.1 F'+document.getElementById('xyzspeed').value+' ; move -0.1 mm in the Z-direction at '+document.getElementById('xyzspeed').value+' mm/min\nG90 ; enter absolute positioning mode\n');">-0.1</button><button onclick="add('G91 ; enter relative positioning mode\nG0 Z0.1 F'+document.getElementById('xyzspeed').value+' ; move 0.1 mm in the Z-direction at '+document.getElementById('xyzspeed').value+' mm/min\nG90 ; enter absolute positioning mode\n');">0.1</button><button onclick="add('G91 ; enter relative positioning mode\nG0 Z1 F'+document.getElementById('xyzspeed').value+' ; move 1 mm in the Z-direction at '+document.getElementById('xyzspeed').value+' mm/min\nG90 ; enter absolute positioning mode\n');">1</button><button onclick="add('G91 ; enter relative positioning mode\nG0 Z10 F'+document.getElementById('xyzspeed').value+' ; move 10 mm in the Z-direction at '+document.getElementById('xyzspeed').value+' mm/min\nG90 ; enter absolute positioning mode\n');">10</button><button onclick="add('G91 ; enter relative positioning mode\nG0 Z100 F'+document.getElementById('xyzspeed').value+' ; move 100 mm in the Z-direction at '+document.getElementById('xyzspeed').value+' mm/min\nG90 ; enter absolute positioning mode\n');">100</button><br><br>
+<button onclick="add('G28 X0 Y0 Z0 ; set all axis to home position (0,0,0)\n');">Home All</button>
+<br><br>
+<div style="width:240px; float: left;">
+<h3>Heat Bed:</h3>
+Temp (C): <input value="182" id="bedtemp" style="width:40px;">
+<button onclick="add('M140 S'+document.getElementById('bedtemp').value+' ; set heatbed temperature to '+document.getElementById('bedtemp').value+' degrees\n');">Set Heat</button>
+<h3>Printing:</h3>
+Print Speed: <input value="100" id="speed" style="width:40px;">%
+<button onclick="add('M220 S'+document.getElementById('speed').value+' ; set print speed to '+document.getElementById('speed').value+'%\n');">Set Speed</button>
+</div>
+<div style="width:240px; float: left;">
+<h3>Extruder:</h3>
+Temp (C): <input value="182" id="tempvalue" style="width:40px;">
+<button onclick="add('M104 S'+document.getElementById('tempvalue').value+' ; set temperature to '+document.getElementById('tempvalue').value+' degrees\n');">Set Heat</button><br><br>
+Speed (mm/min): <input value="80" id="extspeed" style="width:40px;"><br>
+Extrude (mm): <input value="5" id="extamt" style="width:40px;">
+<button onclick="add('G91 ; enter relative positioning mode\nG1 E'+document.getElementById('extamt').value+' F'+document.getElementById('extspeed').value+' ; extrude '+document.getElementById('extamt').value+' mm at '+document.getElementById('extspeed').value+' mm/min\nG90 ; enter absolute positioning mode\n');">Extrude</button><br>
+Retract (mm): <input value="5" id="retamt" style="width:40px;">
+<button onclick="add('G91 ; enter relative positioning mode\nG1 E'+document.getElementById('retamt').value+' F'+document.getElementById('extspeed').value+' ; retract '+document.getElementById('retamt').value+' mm at '+document.getElementById('extspeed').value+' mm/min\nG90 ; enter absolute positioning mode\n');">Retract</button>
+</div>
+<div style="width:500px; padding-top: 170px;">
+<textarea id="gcode" cols="60" rows="10">
+G21 ; use metric measurements
+</textarea><br><br>
+</form>
+</div>
+</div>
+</div>
+<img id="bottom" src="bottom.png" alt="">
+</body>
+</html>
